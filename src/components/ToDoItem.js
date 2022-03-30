@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { todoActions } from '../store/todo-slice';
 
-function ToDoItem({ id, title, isChecked }) {
+function ToDoItem({ fbkey, title, isChecked }) {
   const isLogin = useSelector((state) => state.login.isLogin);
   const email = useSelector((state) => state.login.email);
   const dispatch = useDispatch();
   const [checkBoxIsChecked, setCheckBoxIsChecked] = useState(isChecked);
 
   const removeToDoHandler = () => {
-    dispatch(todoActions.removeTodo({ id, email, isLogin }));
+    dispatch(todoActions.removeTodo({ fbkey, email, isLogin }));
   };
 
   return (
@@ -44,6 +44,10 @@ const Wrapper = styled.div`
 
 const Title = styled.p`
   text-decoration: ${(props) => (props.isChecked ? 'line-through' : 'none')};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 0.3rem;
 `;
 
 const Icon = styled.div`

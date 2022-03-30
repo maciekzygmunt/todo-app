@@ -30,11 +30,10 @@ function App() {
         `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}.json`
       );
       const data = await response.json();
-
       const transformedTodos = [];
       for (const key in data) {
         const todoObj = {
-          id: key,
+          fbkey: key,
           ...data[key],
         };
         transformedTodos.push(todoObj);

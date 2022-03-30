@@ -51,6 +51,7 @@ function LoginModal({ opened, setOpened }) {
         }
       );
       const data = await response.json();
+      console.log(data);
       dispatch(loginActions.login());
       dispatch(loginActions.setEmail(values.email.split('.').join('')));
       setOpened(false);
