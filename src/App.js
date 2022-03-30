@@ -9,6 +9,7 @@ import { todoActions } from './store/todo-slice';
 
 function App() {
   const isLogin = useSelector((state) => state.login.isLogin);
+  const email = useSelector((state) => state.login.email);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +22,30 @@ function App() {
         })
       );
     }
-  }, []);
+  }, [isLogin, dispatch]);
+
+  useEffect(() => {
+    const getTodos = async () => {
+      const response = await fetch(
+        `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}.json`
+      );
+      const data = await response.json();
+
+      const transformedTodos = [];
+      for (const key in data) {
+        const todoObj = {
+          id: key,
+          ...data[key],
+        };
+        transformedTodos.push(todoObj);
+      }
+      dispatch(todoActions.setTodos(transformedTodos));
+    };
+    if (isLogin) {
+      getTodos();
+      dispatch(todoActions.removeTodo({ id: 1, isLogin: false }));
+    }
+  }, [isLogin, email, dispatch]);
 
   return (
     <>

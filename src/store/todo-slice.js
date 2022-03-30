@@ -13,7 +13,7 @@ const todoSlice = createSlice({
       if (action.payload.isLogin) {
         const sendTodo = async () => {
           const response = await fetch(
-            `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${action.payload.email}/${action.payload.todo.id}.json`,
+            `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${action.payload.email}.json`,
             {
               method: 'POST',
               body: JSON.stringify({
@@ -23,7 +23,6 @@ const todoSlice = createSlice({
               }),
             }
           );
-          console.log(response);
         };
         sendTodo();
         state.todos = [...state.todos, action.payload.todo];
@@ -52,6 +51,9 @@ const todoSlice = createSlice({
         });
         state.todos = filteredTodos;
       }
+    },
+    setTodos(state, action) {
+      state.todos = action.payload;
     },
   },
 });

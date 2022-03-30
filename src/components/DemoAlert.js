@@ -3,7 +3,7 @@ import styled from 'styled-components';
 function DemoAlert() {
   return (
     <Wrapper>
-      <Para>This is just a demo! Signup for full functionality.</Para>
+      <Para>This is just a demo! Sign Up for full functionality.</Para>
     </Wrapper>
   );
 }
