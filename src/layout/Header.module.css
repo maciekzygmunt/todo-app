@@ -1,0 +1,25 @@
+.mainHeader {
+  background: #339af0;
+  width: 100%;
+  height: 4rem;
+  color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainHeader > * {
+  margin: 1rem;
+}
+
+.mainHeader p {
+  font-size: 2rem;
+}
+
+.loginIcon {
+  cursor: pointer;
+  transition: transform 150ms ease-out;
+}
+.loginIcon:hover {
+  transform: scale(1.1);
+}
