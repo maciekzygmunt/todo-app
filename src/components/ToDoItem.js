@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import { Checkbox } from '@mantine/core';
 import { TrashX } from 'tabler-icons-react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { todoActions } from '../store/todo-slice';
 
 function ToDoItem({ id, title, isChecked }) {
+  const isLogin = useSelector((state) => state.login.isLogin);
+  const email = useSelector((state) => state.login.email);
   const dispatch = useDispatch();
   const [checkBoxIsChecked, setCheckBoxIsChecked] = useState(isChecked);
 
   const removeToDoHandler = () => {
-    console.log(id);
-
-    dispatch(todoActions.removeTodo(id));
+    dispatch(todoActions.removeTodo({ id, email, isLogin }));
   };
 
   return (

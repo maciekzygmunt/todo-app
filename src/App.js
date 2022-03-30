@@ -16,7 +16,8 @@ function App() {
       dispatch(
         todoActions.addTodo({
           todo: { id: 1, title: 'Demo TODO', isChecked: false },
-          isLogin: isLogin,
+          isLogin,
+          email: '',
         })
       );
     }

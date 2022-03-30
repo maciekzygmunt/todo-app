@@ -6,6 +6,7 @@
     "@mantine/core": "^4.1.0",
     "@mantine/form": "^4.1.0",
     "@mantine/hooks": "^4.1.0",
+    "@mantine/notifications": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",

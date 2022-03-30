@@ -1,5 +1,5 @@
 import { Modal as ModalComp } from '@mantine/core';
-import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
+import { TextInput, Button, Group } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDispatch, useSelector } from 'react-redux';
 import { todoActions } from '../store/todo-slice';
@@ -7,6 +7,7 @@ import { todoActions } from '../store/todo-slice';
 function Modal({ opened, setOpened }) {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.login.isLogin);
+  const email = useSelector((state) => state.login.email);
 
   const form = useForm({
     initialValues: {
@@ -22,7 +23,8 @@ function Modal({ opened, setOpened }) {
     dispatch(
       todoActions.addTodo({
         todo: { id: Date.now(), title: values.todo, isChecked: false },
-        isLogin: isLogin,
+        isLogin,
+        email,
       })
     );
     setOpened(false);

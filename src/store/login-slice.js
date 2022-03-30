@@ -12,6 +12,7 @@ const loginSlice = createSlice({
     },
     logout(state, action) {
       state.isLogin = false;
+      state.email = '';
     },
     setEmail(state, action) {
       state.email = action.payload;
