@@ -26,6 +26,7 @@ function App() {
 
   useEffect(() => {
     if (isLogin) {
+      dispatch(todoActions.removeTodo({ fbkey: 'demoTodo', isLogin: false }));
       const getTodos = async () => {
         const response = await fetch(
           `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}.json`
@@ -42,9 +43,8 @@ function App() {
         dispatch(todoActions.setTodos(transformedTodos));
       };
       getTodos();
-      dispatch(todoActions.removeTodo({ fbkey: 'demoTodo', isLogin: false }));
     }
-  }, [isLogin, email, dispatch]);
+  }, [email, dispatch]);
 
   return (
     <>
