@@ -1,11 +1,12 @@
 import classes from './Header.module.css';
-import { Avatar } from '@mantine/core';
 import { Login } from 'tabler-icons-react';
 import LoginModal from '../components/LoginModal';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from 'tabler-icons-react';
 import { loginActions } from '../store/login-slice';
+import styled from 'styled-components';
+import AvatarMenu from '../components/AvatarMenu';
 
 function Header() {
   const [opened, setOpened] = useState(false);
@@ -35,16 +36,34 @@ function Header() {
           />
         )}
         {isLogin && (
-          <Logout
-            className={classes.loginIcon}
-            onClick={logoutHandler}
-            size={36}
-            strokeWidth={2}
-            color={'white'}
-          />
+          <IconsWrapper>
+            <AvatarWrapper>
+              <AvatarMenu />
+            </AvatarWrapper>
+            <Logout
+              className={classes.loginIcon}
+              onClick={logoutHandler}
+              size={36}
+              strokeWidth={2}
+              color={'white'}
+            />
+          </IconsWrapper>
         )}
       </div>
     </>
   );
 }
+
+const IconsWrapper = styled.div`
+  display: flex;
+  column-gap: 0.8rem;
+`;
+
+const AvatarWrapper = styled.div`
+  transition: transform 150ms ease-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 export default Header;

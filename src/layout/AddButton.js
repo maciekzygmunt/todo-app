@@ -9,6 +9,7 @@ function AddButton() {
   const modalToggle = () => {
     setOpened((state) => !state);
   };
+
   return (
     <>
       <Modal opened={opened} setOpened={setOpened} />

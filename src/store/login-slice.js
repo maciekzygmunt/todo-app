@@ -5,6 +5,7 @@ const loginSlice = createSlice({
   initialState: {
     isLogin: false,
     email: '',
+    image: '',
   },
   reducers: {
     login(state, action) {
@@ -16,6 +17,9 @@ const loginSlice = createSlice({
     },
     setEmail(state, action) {
       state.email = action.payload;
+    },
+    setImage(state, action) {
+      state.image = action.payload;
     },
   },
 });
