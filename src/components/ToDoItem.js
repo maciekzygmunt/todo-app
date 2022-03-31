@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { todoActions } from '../store/todo-slice';
 
-function ToDoItem({ fbkey, title, isChecked }) {
+function ToDoItem({ fbkey, title, isChecked, id }) {
   const isLogin = useSelector((state) => state.login.isLogin);
   const email = useSelector((state) => state.login.email);
   const dispatch = useDispatch();
@@ -15,13 +15,30 @@ function ToDoItem({ fbkey, title, isChecked }) {
     dispatch(todoActions.removeTodo({ fbkey, email, isLogin }));
   };
 
+  const checkboxHandler = async (checkboxState) => {
+    setCheckBoxIsChecked(checkboxState);
+    const response = await fetch(
+      `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}/${fbkey}.json`,
+      {
+        method: 'PUT',
+        body: JSON.stringify({
+          id,
+          isChecked: checkboxState,
+          title,
+        }),
+      }
+    );
+  };
+
   return (
     <Wrapper>
       <Checkbox
         checked={checkBoxIsChecked}
-        onChange={(event) => setCheckBoxIsChecked(event.currentTarget.checked)}
+        onChange={(event) => {
+          checkboxHandler(event.currentTarget.checked);
+        }}
       />
-      <Title isChecked={checkBoxIsChecked}>{title}</Title>
+      <Title checkBoxIsChecked={checkBoxIsChecked}>{title}</Title>
       <Icon onClick={removeToDoHandler}>
         <TrashX size={24} strokeWidth={2} color={'black'} />
       </Icon>
@@ -43,7 +60,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.p`
-  text-decoration: ${(props) => (props.isChecked ? 'line-through' : 'none')};
+  text-decoration: ${(props) => (props.checkBoxIsChecked ? 'line-through' : 'none')} 0.15rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

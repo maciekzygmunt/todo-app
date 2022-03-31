@@ -22,7 +22,7 @@ function Modal({ opened, setOpened }) {
   const onAddHandler = (values) => {
     dispatch(
       todoActions.addTodo({
-        todo: { id: Date.now(), title: values.todo, isChecked: false },
+        todo: { id: Date.now(), title: values.todo, isChecked: false, fbkey: Date.now() },
         isLogin,
         email,
       })

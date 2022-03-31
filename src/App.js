@@ -16,7 +16,7 @@ function App() {
     if (!isLogin) {
       dispatch(
         todoActions.addTodo({
-          todo: { id: 1, title: 'Demo TODO', isChecked: false },
+          todo: { id: 1, title: 'Demo TODO', isChecked: false, fbkey: 'demoTodo' },
           isLogin,
           email: '',
         })
@@ -25,24 +25,24 @@ function App() {
   }, [isLogin, dispatch]);
 
   useEffect(() => {
-    const getTodos = async () => {
-      const response = await fetch(
-        `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}.json`
-      );
-      const data = await response.json();
-      const transformedTodos = [];
-      for (const key in data) {
-        const todoObj = {
-          fbkey: key,
-          ...data[key],
-        };
-        transformedTodos.push(todoObj);
-      }
-      dispatch(todoActions.setTodos(transformedTodos));
-    };
     if (isLogin) {
+      const getTodos = async () => {
+        const response = await fetch(
+          `https://to-do-app-ccb69-default-rtdb.europe-west1.firebasedatabase.app/${email}.json`
+        );
+        const data = await response.json();
+        const transformedTodos = [];
+        for (const key in data) {
+          const todoObj = {
+            fbkey: key,
+            ...data[key],
+          };
+          transformedTodos.push(todoObj);
+        }
+        dispatch(todoActions.setTodos(transformedTodos));
+      };
       getTodos();
-      dispatch(todoActions.removeTodo({ id: 1, isLogin: false }));
+      dispatch(todoActions.removeTodo({ fbkey: 'demoTodo', isLogin: false }));
     }
   }, [isLogin, email, dispatch]);
 

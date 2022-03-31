@@ -31,7 +31,7 @@ const todoSlice = createSlice({
     removeTodo(state, action) {
       if (!action.payload.isLogin) {
         let filteredTodos = state.todos.filter((todo) => {
-          return todo.id !== action.payload.id;
+          return todo.fbkey !== action.payload.fbkey;
         });
         state.todos = filteredTodos;
       }
@@ -46,7 +46,7 @@ const todoSlice = createSlice({
           console.log(response);
         };
         removeTodo();
-        let filteredTodos = state.todos.filter((todo) => {
+        const filteredTodos = state.todos.filter((todo) => {
           return todo.fbkey !== action.payload.fbkey;
         });
         state.todos = filteredTodos;

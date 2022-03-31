@@ -6,8 +6,14 @@ function ToDoList() {
 
   return (
     <div>
-      {todos.map((todo, i) => (
-        <ToDoItem key={i} fbkey={todo.fbkey} title={todo.title} isChecked={todo.isChecked} />
+      {todos.map((todo) => (
+        <ToDoItem
+          key={todo.id}
+          id={todo.id}
+          fbkey={todo.fbkey}
+          title={todo.title}
+          isChecked={todo.isChecked}
+        />
       ))}
     </div>
   );
